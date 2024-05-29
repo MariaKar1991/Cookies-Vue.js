@@ -38,33 +38,32 @@
   </section>
 </template>
 
-<script>
-export default {
-  data() {
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  data(): { showCookieConsent: boolean } {
     return {
       showCookieConsent: true,
     };
   },
   methods: {
-    acceptCookies() {
-      // Logic to accept all cookies
+    acceptCookies(): void {
       console.log("Cookies accepted");
       sessionStorage.setItem("cookieConsent", "accepted");
       this.closeModal();
     },
-    rejectCookies() {
-      // Logic to reject all cookies
+    rejectCookies(): void {
       console.log("Cookies rejected");
       sessionStorage.setItem("cookieConsent", "rejected");
       this.closeModal();
     },
-    closeModal() {
+    closeModal(): void {
       // Logic to close the cookie consent modal
       console.log("Modal closed");
       this.showCookieConsent = false;
     },
-    checkCookieConsent() {
-      // Check sessionStorage for the user's cookie consent decision
+    checkCookieConsent(): void {
       const consent = sessionStorage.getItem("cookieConsent");
       // If the user has already accepted or rejected cookies, do not show the consent modal
       if (consent === "accepted" || consent === "rejected") {
@@ -72,11 +71,11 @@ export default {
       }
     },
   },
-  mounted() {
+  mounted(): void {
     // When the component is mounted, check if the user has already made a cookie consent decision
     this.checkCookieConsent();
   },
-};
+});
 </script>
 
 <style scoped>
